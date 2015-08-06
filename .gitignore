@@ -6,6 +6,12 @@
 !app/logs/.gitkeep
 /app/phpunit.xml
 /bin/
-/composer.phar
 /vendor/
 /web/bundles/
+/nbproject/private/
+*~
+
+# composer
+##########
+/composer.phar
+/composer.lock
