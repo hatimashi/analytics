@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AnalyticsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -10,10 +10,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Campaign
  *
  * @ORM\Table(name="campaign")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\CampaignRepository")
+ * @ORM\Entity(repositoryClass="AnalyticsBundle\Repository\CampaignRepository")
  */
-class Campaign
-{
+class Campaign {
+
     /**
      * @var integer
      *
@@ -24,6 +24,20 @@ class Campaign
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="campaign_id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user_id;
+    
+    /**
+     * 
+     * @ORM\OneToMany(targetEntity="Redirection", mappedBy="campaign_id")
+     */
+    protected $redirection_id;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -31,26 +45,19 @@ class Campaign
     private $name;
 
     /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="campaign")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id")
-     */
-    private $user_id;
-    
-    /**
-     * @var \DateTime
+     * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
-    
+
     /**
-     * 
-     * @ORM\OneToMany(targetEntity="AdvUrl", mappedBy="campaign")
+     * Constructor
      */
-    protected $adv_url_id;
+    public function __construct() {
+        $this->redirection_id = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -85,18 +92,18 @@ class Campaign
         return $this->name;
     }
 
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Campaign
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
+//    /**
+//     * Set created
+//     *
+//     * @param \DateTime $created
+//     * @return Campaign
+//     */
+//    public function setCreated($created)
+//    {
+//        $this->created = $created;
+//
+//        return $this;
+//    }
 
     /**
      * Get created
@@ -106,13 +113,6 @@ class Campaign
     public function getCreated()
     {
         return $this->created;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->adv_url_id = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -139,35 +139,35 @@ class Campaign
     }
 
     /**
-     * Add adv_url_id
+     * Add redirection_id
      *
-     * @param \AppBundle\Entity\AdvUrl $advUrlId
+     * @param \AnalyticsBundle\Entity\Redirection $redirectionId
      * @return Campaign
      */
-    public function addAdvUrlId(\AppBundle\Entity\AdvUrl $advUrlId)
+    public function addRedirectionId(\AnalyticsBundle\Entity\Redirection $redirectionId)
     {
-        $this->adv_url_id[] = $advUrlId;
+        $this->redirection_id[] = $redirectionId;
 
         return $this;
     }
 
     /**
-     * Remove adv_url_id
+     * Remove redirection_id
      *
-     * @param \AppBundle\Entity\AdvUrl $advUrlId
+     * @param \AnalyticsBundle\Entity\Redirection $redirectionId
      */
-    public function removeAdvUrlId(\AppBundle\Entity\AdvUrl $advUrlId)
+    public function removeRedirectionId(\AnalyticsBundle\Entity\Redirection $redirectionId)
     {
-        $this->adv_url_id->removeElement($advUrlId);
+        $this->redirection_id->removeElement($redirectionId);
     }
 
     /**
-     * Get adv_url_id
+     * Get redirection_id
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAdvUrlId()
+    public function getRedirectionId()
     {
-        return $this->adv_url_id;
+        return $this->redirection_id;
     }
 }

@@ -19,18 +19,20 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AdvUrl", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AnalyticsBundle\Entity\Redirection", mappedBy="user_id")
      */
-    protected $adv_url;
+    protected $redirection_id;
     
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Campaign", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AnalyticsBundle\Entity\Campaign", mappedBy="user_id")
      */
-    protected $campaign;
+    protected $campaign_id;
     
     public function __construct()
     {
         parent::__construct();
+        $this->redirection = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->campaign = new \Doctrine\Common\Collections\ArrayCollection();
         // your own logic
     }
 }

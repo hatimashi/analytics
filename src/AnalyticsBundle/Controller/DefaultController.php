@@ -1,24 +1,58 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AnalyticsBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Snc\RedisBundle\Command\RedisBaseCommand;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @Security("has_role('ROLE_USER')")
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
+        
+        return $this->redirect($this->generateUrl('sonata_admin_redirect'));
+    }
+    
+    /**
+     * @Template()
+     */
+    public function incomingAction($param) {
+        
+    }
+    
+    /**
+     * @Template()
+     */
+    public function redirectAction($param) {
+        
+    }
+    
+    /**
+     * @Route("/analysis")
+     * @Template()
+     */
+    public function analysisAction($param) {
+        
+//        return $this->redirect($this->generateUrl('analytics.analysis'));
+    }
+    
+    /**
+     * @Route("/generate")
+     * @Template()
+     */
+    public function generateAction($param) {
+        
+        $response = $this->redirect($this->generateUrl('analytics.generate'));
+        
+        return $response;
     }
     
     /**
@@ -33,6 +67,7 @@ class DefaultController extends Controller
         
 //        $redis = new Redis();
         $redis = $this->container->get('snc_redis.default');
+        $redis->set(1, 'jedynka');
         $redisRow = $redis->get(1);
         
         return array(

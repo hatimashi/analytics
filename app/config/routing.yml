@@ -3,7 +3,7 @@ user:
     prefix:   /
 
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@AnalyticsBundle/Controller/"
     type:     annotation
 
 fos_user:
