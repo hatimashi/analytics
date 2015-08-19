@@ -1,0 +1,33 @@
+services:
+    sonata.admin.campaign:
+        class: AnalyticsBundle\Admin\CampaignAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Campaign" }
+        arguments:
+            - ~
+            - AnalyticsBundle\Entity\Campaign
+            - ~
+        calls:
+            - [ setLabelTranslatorStrategy, ["@sonata.admin.label.strategy.underscore"]]
+            
+    sonata.admin.redirection:
+        class: AnalyticsBundle\Admin\RedirectionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Redirection" }
+        arguments:
+            - ~
+            - AnalyticsBundle\Entity\Redirection
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setLabelTranslatorStrategy, ["@sonata.admin.label.strategy.underscore"]]
+            
+    sonata.admin.click:
+        class: AnalyticsBundle\Admin\ClickAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Click" }
+        arguments:
+            - ~
+            - AnalyticsBundle\Entity\Click
+            - ~
+        calls:
+            - [ setLabelTranslatorStrategy, ["@sonata.admin.label.strategy.underscore"]]

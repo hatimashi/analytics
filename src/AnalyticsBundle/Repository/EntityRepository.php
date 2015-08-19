@@ -6,8 +6,9 @@ use Doctrine\ORM\EntityRepository as BaseRepository;
 
 class EntityRepository extends BaseRepository {
 
-    public function create() {
-    }
+//    public function create() {
+//        
+//    }
 
     public function update() {
     }
@@ -16,7 +17,7 @@ class EntityRepository extends BaseRepository {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
 
-        return $post;
+        return $entity;
     }
 
 }

@@ -1,0 +1,6 @@
+imports:
+    - { resource: packages/analyticsServices.yml }
+    - { resource: packages/analyticsFormsServices.yml }
+    - { resource: packages/analyticsRepositoryServices.yml }
+    - { resource: packages/gedmoServices.yml }
+    - { resource: packages/sonataServices.yml }

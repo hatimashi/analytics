@@ -1,0 +1,12 @@
+services:
+    doctrine_repository.redirection:
+        class: Doctrine\Common\Persistence\ObjectRepository
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments:
+            - AnalyticsBundle:Redirection
+    generate:
+        class: 'AnalyticsBundle\Repository\Service\RedirectionService'
+        arguments:    [@doctrine_repository.redirection]
+        lazy: true
+

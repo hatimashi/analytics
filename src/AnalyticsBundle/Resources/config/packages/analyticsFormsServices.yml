@@ -1,0 +1,5 @@
+services:
+    analytics.form.type.generate:
+        class: AnalyticsBundle\Form\Type\GenerateType
+        tags:
+            - { name: form.type, alias: generate }

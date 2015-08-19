@@ -1,0 +1,8 @@
+services:   
+    analytics.generate.factory:
+        class: AnalyticsBundle\Generate\GenerateFactory
+        arguments: [@service_container]
+        
+    analytics.generate:
+        class: AnalyticsBundle\Generate\Generate
+       

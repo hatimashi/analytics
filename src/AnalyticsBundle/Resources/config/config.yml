@@ -1,0 +1,4 @@
+imports:
+    - { resource: packages/sonataConfig.yml }
+    - { resource: packages/fosuserbundleConfig.yml}
+    - { resource: packages/redisConfig.yml}

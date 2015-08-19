@@ -49,14 +49,14 @@ class Redirection {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_deleted", type="boolean", length=255)
+     * @ORM\Column(name="is_deleted", type="boolean", length=255, options={"default":0})
      */
     private $is_deleted;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer", length=255)
+     * @ORM\Column(name="status", type="integer", length=255, options={"default":1})
      */
     private $status;
     
@@ -70,14 +70,14 @@ class Redirection {
     /**
      * @var string
      *
-     * @ORM\Column(name="generated_url", type="string", length=255)
+     * @ORM\Column(name="generated_url", type="string", length=255, nullable=true)
      */
     private $generated_url;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="options", type="integer", length=255)
+     * @ORM\Column(name="options", type="integer", length=255, nullable=true)
      */
     private $options;
 

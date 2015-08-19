@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2>{{ info }}</h2>
+    <p>
+        {% if form is defined %}
+            {{ form(form) }}
+        {% endif %}
+    </p>
+{% endblock %}
