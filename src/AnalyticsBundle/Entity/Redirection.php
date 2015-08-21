@@ -5,6 +5,7 @@ namespace AnalyticsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Redirection
@@ -15,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Redirection {
 
+    const STATUS_ACTIVE = 1;
+    
     /**
      * @var integer
      *
@@ -49,20 +52,22 @@ class Redirection {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_deleted", type="boolean", length=255, options={"default":0})
+     * @ORM\Column(name="is_deleted", type="boolean", nullable=true, options={"default":"0"})
      */
     private $is_deleted;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer", length=255, options={"default":1})
+     * @ORM\Column(name="status", type="integer", nullable=true, options={"default":"1"})
      */
     private $status;
     
     /**
      * @var string
      *
+     * @-Assert\Url()
+     * 
      * @ORM\Column(name="origin_url", type="string", length=255)
      */
     private $origin_url;
@@ -94,7 +99,9 @@ class Redirection {
      * Constructor
      */
     public function __construct() {
-        $this->campaign_id = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        $this->is_deleted = FALSE;
+        $this->status = self::STATUS_ACTIVE;
     }
 
     /**
@@ -108,52 +115,6 @@ class Redirection {
     }
 
     /**
-     * Set is_deleted
-     *
-     * @param \bool $isDeleted
-     * @return Redirection
-     */
-    public function setIsDeleted(\bool $isDeleted)
-    {
-        $this->is_deleted = $isDeleted;
-
-        return $this;
-    }
-
-    /**
-     * Get is_deleted
-     *
-     * @return \bool 
-     */
-    public function getIsDeleted()
-    {
-        return $this->is_deleted;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Redirection
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set origin_url
      *
      * @param string $originUrl
@@ -161,6 +122,12 @@ class Redirection {
      */
     public function setOriginUrl($originUrl)
     {
+        $regex = "/(https?:\/\/).*/";
+        $protocol = "http://";
+        
+        if(preg_match($regex, $originUrl) == FALSE){
+            $originUrl = substr_replace($originUrl, $protocol, 0, 0);
+        }
         $this->origin_url = $originUrl;
 
         return $this;
@@ -322,5 +289,51 @@ class Redirection {
     public function getClickId()
     {
         return $this->click_id;
+    }
+
+    /**
+     * Set is_deleted
+     *
+     * @param boolean $isDeleted
+     * @return Redirection
+     */
+    public function setIsDeleted($isDeleted)
+    {
+        $this->is_deleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * Get is_deleted
+     *
+     * @return boolean 
+     */
+    public function getIsDeleted()
+    {
+        return $this->is_deleted;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Redirection
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

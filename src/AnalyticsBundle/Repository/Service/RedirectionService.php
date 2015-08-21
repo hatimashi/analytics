@@ -13,19 +13,14 @@ class RedirectionService {
     }
 
     public function create($userId, $originUrl, $generatedUrl) {
-        $redirection = new Redirection();
         
-        $redirection->setUserId($userId);
-        $redirection->setOriginUrl($originUrl);
-        $redirection->setGeneratedUrl($generatedUrl);
-        
-        return $redirection;
+        return $this->repository->create($userId, $originUrl, $generatedUrl);
     }
 
-    public function update(Redirection $redirection) {
-    
-        return $this->container->create($redirection);
-    }
+//    public function update(Redirection $redirection) {
+//    
+//        return $this->container->create($redirection);
+//    }
     
     public function save($redirection) {
     

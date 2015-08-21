@@ -2,7 +2,7 @@
 
 namespace AnalyticsBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use AnalyticsBundle\Repository\EntityRepository;
 
 /**
  * RedirectionRepository

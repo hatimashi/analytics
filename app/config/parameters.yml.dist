@@ -19,4 +19,4 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     #System
-    system_url: analytics.pl.local/redirect
+    system_url: analytics.pl.local/incoming

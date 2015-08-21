@@ -6,8 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class GenerateType extends AbstractType 
-{
+class GenerateType extends AbstractType {
 
     /**
      * @param FormBuilderInterface $builder
@@ -15,16 +14,18 @@ class GenerateType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('user_id', null, array('label' => 'user_id'))
-                ->add('origin_url', null, array('label' => 'origin_url'))
-                ->add('options', null, array('label' => 'options'))
-                ->add('save', 'submit', array('label' => 'save'))
+                ->add('origin_url', null, array(
+                    'attr' => array(
+                        'placeholder' => 'Origin Url',
+                    ),
+                    'label' => 'origin_url'))
+                ->add('save', 'submit', array('label' => 'generate'))
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
+//    /**
+//     * @param OptionsResolverInterface $resolver
+//     */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'AnalyticsBundle\Entity\Redirection'

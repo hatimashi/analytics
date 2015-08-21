@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Snc\RedisBundle\Command\RedisBaseCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use UserBundle\Entity\User;
 
 class DefaultController extends Controller {
 
@@ -21,10 +22,14 @@ class DefaultController extends Controller {
     }
 
     /**
+     * @Route('/incoming?id={id}')
      * @Template()
      */
-    public function incomingAction($param) {
+    public function incomingAction($id) {
         
+        $response = array('id' => $id);
+        
+        return $response;
     }
 
     /**
@@ -46,29 +51,35 @@ class DefaultController extends Controller {
     /**
      * @Route("/generate")
      * @Template()
+     * @Security("has_role('ROLE_USER')")
      */
     public function generateAction(Request $request) {
 
         $param = null;
-        $userId = $this->getUser();
-        
         $form = $this->createForm('generate', $param);
         $form->handleRequest($request);
-        
-        $originUrl = $request->request->get('origin_url');
-        
+
         if ($form->isValid()) {
+
+            $userId = $this->getUser();
+
+            $originUrl = $form["origin_url"]->getData();
+
             //Factory
-            $date = \DateTime::ATOM;
+            $date = microtime();
             $service = $this->container->get('analytics.generate.factory')->factory();
-            $generatedUrl = $service->makeGeneratedUrl($originUrl, $date);
-            
-            //Create and Save
-            $create = $this->get('generate')->create($userId, $originUrl, $generatedUrl);
-            $this->get('generate')->save($create);
-            $response = array('info' => 'Wygenerowano: ' . $generatedUrl);
-        }else {
-            
+            try {
+                $generatedUrl = $service->makeGeneratedUrl($originUrl, $date);
+                //Create and Save
+                $create = $this->get('generate')->create($userId, $originUrl, $generatedUrl);
+                $this->get('generate')->save($create);
+
+                $response = array('info' => 'Wygenerowano: ' . $generatedUrl);
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
+        } else {
+
             $response = array('form' => $form->createView(), 'info' => 'Fill to generate proper redirection URL');
         }
 

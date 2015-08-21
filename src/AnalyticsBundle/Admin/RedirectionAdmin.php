@@ -30,14 +30,12 @@ class RedirectionAdmin extends Admin {
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
-                ->add('campaign_id', null, array('label' => 'campaign_id'))
-                ->add('user_id', 'entity', array('class' => 'UserBundle\Entity\User', 'label' => 'user_id'))
-                ->add('is_deleted', null, array('label' => 'is_deleted'))
-                ->add('status', null, array('label' => 'status'))
-                ->add('origin_url', null, array('label' => 'origin_url'))
-                ->add('generated_url', null, array('label' => 'generated_url'))
-                ->add('options', null, array('label' => 'options'))
-                ->add('created', null, array('label' => 'created'))
+                ->add('is_deleted')
+                ->add('status')
+                ->add('origin_url')
+                ->add('generated_url')
+                ->add('options')
+                ->add('created')
         ;
     }
 
@@ -45,8 +43,8 @@ class RedirectionAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('id')
-                ->add('campaign_id', null, array('label' => 'campaign_id'))
-                ->add('user_id', 'entity', array('class' => 'UserBundle\Entity\User', 'label' => 'user_id'))
+                ->add('campaign_id')
+                ->add('user_id')
                 ->add('is_deleted', null, array('label' => 'is_deleted'))
                 ->add('status', null, array('label' => 'status'))
                 ->add('origin_url', null, array('label' => 'origin_url'))
