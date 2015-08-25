@@ -4,7 +4,15 @@ namespace AnalyticsBundle\Analysis;
 
 abstract class AnalysisAbstract implements AnalysisInterface{
     
-    protected function analysis($param){
+    public function in($clickParams){
+        
+    }
+    
+    public function analysis($param){
+        
+    }
+    
+    public function out($parameters){
         
     }
 }

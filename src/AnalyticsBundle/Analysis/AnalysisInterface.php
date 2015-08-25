@@ -4,5 +4,7 @@ namespace AnalyticsBundle\Analysis;
 
 interface AnalysisInterface {
     
-    public function Analysis($param);
+    public function in($clickParams);
+    public function analysis($param);
+    public function out($parameters);
 }
