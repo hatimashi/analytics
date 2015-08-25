@@ -17,6 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Redirection {
 
     const STATUS_ACTIVE = 1;
+    const OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN = 1;
+    const OPTIONS_NOT_ALLOWED_FROM_DIFFERENT_DOMAIN = 2;
     
     /**
      * @var integer
@@ -79,6 +81,13 @@ class Redirection {
      */
     private $generated_url;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="redirect_url", type="string", length=255, nullable=false)
+     */
+    private $redirect_url;
+
     /**
      * @var integer
      *
@@ -335,5 +344,29 @@ class Redirection {
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set redirectUrl
+     *
+     * @param string $redirectUrl
+     *
+     * @return Redirection
+     */
+    public function setRedirectUrl($redirectUrl)
+    {
+        $this->redirect_url = $redirectUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get redirectUrl
+     *
+     * @return string
+     */
+    public function getRedirectUrl()
+    {
+        return $this->redirect_url;
     }
 }
