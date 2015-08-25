@@ -27,7 +27,7 @@ class EntityRepository extends BaseRepository {
         $options = $entity->getOptions();
         
         $response = ($options == Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN) ? array(
-            'id' => $entity->getId(),
+            'redirection' => $entity,
             'redirectionUrl' => $entity->getRedirectUrl(),
             ) : FALSE;
         

@@ -23,11 +23,11 @@ class ClickAnalysis extends AnalysisAbstract {
         $ip = $clickParams['request']->server->get('REMOTE_ADDR');
         $userAgent = $clickParams['request']->server->get('HTTP_USER_AGENT');
         
-        if(!$redirectionEntityInfo['id']){
+        if(!$redirectionEntityInfo['redirection']){
             return false;
         }else{
             $parameters = array(
-                'redirectionId' => $redirectionEntityInfo['id'],
+                'redirectionId' => $redirectionEntityInfo['redirection'],
                 'userSession' => '',
                 'referer' => $referer,
                 'ip' => $ip,

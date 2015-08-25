@@ -17,7 +17,7 @@ class ClickRepository extends EntityRepository {
 
         $click = new Click();
 
-//        $click->setRedirectionId($params['redirectionId']);
+        $click->setRedirectionId($params['redirectionId']);
         $click->setUserSession($params['userSession']);
         $click->setReferer($params['referer']);
         $click->setIp($params['ip']);
