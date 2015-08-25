@@ -26,7 +26,7 @@ class Click
     /**
      * 
      * @ORM\ManyToOne(targetEntity="Redirection", inversedBy="click_id")
-     * @ORM\JoinColumn(name="redirection_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="redirection_id", referencedColumnName="id", nullable=TRUE)
      */
     private $redirection_id;
     

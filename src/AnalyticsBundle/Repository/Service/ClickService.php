@@ -2,7 +2,7 @@
 
 namespace AnalyticsBundle\Repository\Service;
 
-class RedirectionService {
+class ClickService {
 
     protected $repository;
 
@@ -14,13 +14,10 @@ class RedirectionService {
         
         return $this->repository->create($params);
     }
-    
+
     public function save($redirection) {
     
         return $this->repository->save($redirection);
     }
-    
-    public function findRedirection($entityName, $redirectionId) {
-        return $this->repository->findRedirection($entityName, $redirectionId);
-    }
+
 }

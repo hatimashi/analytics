@@ -3,6 +3,7 @@
 namespace AnalyticsBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -22,21 +23,37 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route('/incoming?id={id}')
+     * @Route("/incoming/id={id}")
+     * @Method({"GET", "POST"})
      * @Template()
      */
-    public function incomingAction($id) {
-        
-        $response = array('id' => $id);
-        
+    public function incomingAction(Request $request, $id) {
+
+        $clickParams = array(
+            'request' => $request,
+            'id' => $id,
+        );
+
+        //Create & Save
+        $params = $this->container->get('analytics.click_analysis')->in($clickParams);
+        $createdRepository = $this->get('click')->create($params);
+        if ($this->get('click')->save($createdRepository)) {
+            $response = $this->redirect($this->generateUrl('analytics_default_redirect', array('url' => $params['redirectionUrl'])));
+//            $response = $this->redirect($url);
+        } else {
+            echo 'We can/\'t redirect You.';
+        }
         return $response;
     }
 
     /**
+     * @Route("/redirect/{url}", requirements={"url"=".+"})
      * @Template()
      */
-    public function redirectAction($param) {
+    public function redirectAction($url) {
         
+        return $this->redirect($url);
+//        return array('url' => $url);
     }
 
     /**
@@ -70,8 +87,14 @@ class DefaultController extends Controller {
             $service = $this->container->get('analytics.generate.factory')->factory();
             try {
                 $generatedUrl = $service->makeGeneratedUrl($originUrl, $date);
-                //Create and Save
-                $create = $this->get('generate')->create($userId, $originUrl, $generatedUrl);
+
+                $params = array(
+                    'userId' => $userId,
+                    'originUrl' => $originUrl,
+                    'generatedUrl' => $generatedUrl
+                );
+                //Create & Save
+                $create = $this->get('generate')->create($params);
                 $this->get('generate')->save($create);
 
                 $response = array('info' => 'Wygenerowano: ' . $generatedUrl);
@@ -91,10 +114,6 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function testAction(Request $request) {
-
-        $string1 = md5("Hello");
-        $string2 = md5("Hello");
-
 
 //        $redis = new Redis();
         $redis = $this->container->get('snc_redis.default');

@@ -7,23 +7,9 @@ use AnalyticsBundle\Entity\Redirection;
 
 class EntityRepository extends BaseRepository {
 
-//    public function create() {
-//        
-//    }
+    public function create($params) {
 
-//    public function update() {
-//        
-//    }
-
-    public function create($userId, $originUrl, $generatedUrl) {
-        
-        $redirection = new Redirection();
-
-        $redirection->setUserId($userId);
-        $redirection->setOriginUrl($originUrl);
-        $redirection->setGeneratedUrl($generatedUrl);
-        
-        return $redirection;
+        return $entity;
     }
 
     public function save($entity) {
@@ -33,6 +19,27 @@ class EntityRepository extends BaseRepository {
 
 
         return $entity;
+    }
+
+    public function findRedirection($entityName, $redirectionOriginUrl) {
+        $entity = $this->getEntityManager()->getRepository($entityName)->findOneBy(array('origin_url' => $redirectionOriginUrl));
+
+        $options = $entity->getOptions();
+        
+        $response = ($options == Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN) ? array(
+            'id' => $entity->getId(),
+            'redirectionUrl' => $entity->getRedirectUrl(),
+            ) : FALSE;
+        
+//        if ( Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN == 2) {
+//            if (!$entity) {
+//                $response = FALSE;
+//            }
+//        } else {
+//            $response = $entity;
+//        }
+
+        return $response;
     }
 
 }

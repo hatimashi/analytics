@@ -9,4 +9,14 @@ services:
         class: 'AnalyticsBundle\Repository\Service\RedirectionService'
         arguments:    [@doctrine_repository.redirection]
         lazy: true
-
+        
+    doctrine_repository.click:
+        class: Doctrine\Common\Persistence\ObjectRepository
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments:
+            - AnalyticsBundle:Click
+    click:
+        class: 'AnalyticsBundle\Repository\Service\ClickService'
+        arguments:    [@doctrine_repository.click]
+        lazy: true  

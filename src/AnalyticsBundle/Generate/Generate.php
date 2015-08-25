@@ -10,11 +10,9 @@ class Generate extends GenerateAbstract{
         
         $params = array(
             'id' => $generatedId,
-        );
-        
-        $generatedUrl = $this->systemUrl . '?' . http_build_query($params);
+        );    
+        $generatedUrl = $this->systemUrl . '/' . http_build_query($params);
     
-        
         return $generatedUrl;
     }
 }

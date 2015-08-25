@@ -5,4 +5,10 @@ services:
         
     analytics.generate:
         class: AnalyticsBundle\Generate\Generate
-       
+    
+    analytics.analysis:
+        class: AnalyticsBundle\Analysis\Analysis
+        
+    analytics.click_analysis:
+        class: AnalyticsBundle\Analysis\ClickAnalysis
+        arguments: [@service_container]

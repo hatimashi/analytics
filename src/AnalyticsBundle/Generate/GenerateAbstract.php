@@ -20,5 +20,4 @@ abstract class GenerateAbstract implements GenerateInterface {
 
         return $generatedId;
     }
-
 }
