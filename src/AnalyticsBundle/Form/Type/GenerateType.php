@@ -5,6 +5,7 @@ namespace AnalyticsBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use AnalyticsBundle\Entity\Redirection;
 
 class GenerateType extends AbstractType {
 
@@ -16,9 +17,21 @@ class GenerateType extends AbstractType {
         $builder
                 ->add('origin_url', null, array(
                     'attr' => array(
-                        'placeholder' => 'Origin Url',
+                        'placeholder' => 'Redirect from URL',
                     ),
                     'label' => 'origin_url'))
+                ->add('redirect_url', null, array(
+                    'attr' => array(
+                        'placeholder' => 'Redirect to URL',
+                    )
+                ))
+                ->add('options', 'choice', array(
+                    'choices' => array(
+                        Redirection::OPTIONS_NOT_ALLOWED_FROM_DIFFERENT_DOMAIN => 'Wymagaj Redirect z określonej domeny',
+                        Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN => 'Redirect z dowolnej domeny',
+                    ),
+                    'placeholder' => 'Options',
+                ))
                 ->add('save', 'submit', array('label' => 'generate'))
         ;
     }
