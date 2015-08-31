@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Snc\RedisBundle\Command\RedisBaseCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+use AnalyticsBundle\Entity\Click;
 
 class DefaultController extends Controller {
 
@@ -29,17 +32,60 @@ class DefaultController extends Controller {
      */
     public function incomingAction(Request $request, $id) {
 
+        $response = NULL;
+        $myTime = time() + 60 * 60 * 24 * 30;
+        $redis = $this->container->get('snc_redis.default');
+        $cookie = ($request->cookies->get('__ran') !== NULL ) ? $request->cookies->get('__ran') : NULL;
+
         $clickParams = array(
             'request' => $request,
             'id' => $id,
         );
 
-        //Create & Save
+        $cookieParameters = array(
+            'name' => '__ran',
+            'value' => md5('__ran' . $myTime),
+            'time' => $myTime,
+            'path' => '/',
+        );
+
+        if (!$cookie) {
+            $cookie = new Cookie(
+                    $cookieParameters['name'], $cookieParameters['value'], $cookieParameters['time'], $cookieParameters['path']
+            );
+            $response->headers->setCookie($cookie);
+        }
+
+        //Analise
         $params = $this->container->get('analytics.click_analysis')->in($clickParams);
+
+        //Memcache
+        if (!$this->get('memcache.default')->replace('click:' . $cookie, 0, 2)) {
+            $this->get('memcache.default')->set('click:' . $cookie, 0, 2);
+        } else {
+            $params['status'] = Click::STATUS_FRAUD;
+        }
+
+        //All Clicks
+        $redis->incr('click:' . $cookie . ':' . $cookieParameters['time'] . ':' . $id . ':' . $params['status']);
+
+        $clicksArray = $redis->keys('*');
+        foreach ($clicksArray as $key) {
+            $clickCount[] = array(
+            'key' => $key,
+            'value' => $redis->get($key),
+                );
+        }
+        foreach($clickCount as $click){
+            echo $click;
+        }
+        die;
+
+        //Create & Save in Database
         $createdRepository = $this->get('click')->create($params);
         if ($this->get('click')->save($createdRepository)) {
             $response = $this->redirect($this->generateUrl('analytics_default_redirect', array('url' => $params['redirectionUrl'])));
-//            $response = $this->redirect($url);
+//            $response->headers->setCookie($myCookie);
         } else {
             echo 'We can/\'t redirect You.';
         }
@@ -51,7 +97,7 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function redirectAction($url) {
-        
+
         return $this->redirect($url);
 //        return array('url' => $url);
     }

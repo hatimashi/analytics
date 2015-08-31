@@ -14,6 +14,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Click
 {
+    const STATUS_OK = 0;
+    const STATUS_FRAUD = 1;
+    
     /**
      * @var integer
      *
@@ -66,6 +69,13 @@ class Click
      */
     private $created;
 
+        /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer", length=255)
+     */
+    private $status;
+    
     /**
      * Get id
      *
@@ -212,5 +222,29 @@ class Click
     public function getRedirectionId()
     {
         return $this->redirection_id;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Click
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

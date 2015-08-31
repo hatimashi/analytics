@@ -1,6 +1,7 @@
 imports:
-    - { resource: packages/analyticsServices.yml }
-    - { resource: packages/analyticsFormsServices.yml }
-    - { resource: packages/analyticsRepositoryServices.yml }
-    - { resource: packages/gedmoServices.yml }
-    - { resource: packages/sonataServices.yml }
+    - { resource: packages/analytics_services.yml }
+    - { resource: packages/analytics_forms_services.yml }
+    - { resource: packages/analytics_repository_services.yml }
+    - { resource: packages/gedmo_services.yml }
+    - { resource: packages/sonata_services.yml }
+    - { resource: packages/memcache_services.yml }

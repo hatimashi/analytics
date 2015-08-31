@@ -52,6 +52,12 @@ class Redirection {
     protected $click_id;
     
     /**
+     * 
+     * @ORM\OneToMany(targetEntity="RedirectStatistic", mappedBy="redirect_url_id")
+     */
+    protected $redirect_url_id;
+    
+    /**
      * @var boolean
      *
      * @ORM\Column(name="is_deleted", type="boolean", nullable=true, options={"default":"0"})

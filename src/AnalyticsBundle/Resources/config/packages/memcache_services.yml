@@ -1,0 +1,5 @@
+services:
+    storage.memcache:
+        class: AnalyticsBundle\Storage\MemcacheStorage
+        arguments:  [@memcache.default]
+    

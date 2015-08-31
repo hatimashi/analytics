@@ -2,6 +2,11 @@
 
 namespace AnalyticsBundle\Analysis;
 
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Response;
+
+use AnalyticsBundle\Entity\Click;
+
 class ClickAnalysis extends AnalysisAbstract {
 
     protected $repository;
@@ -23,6 +28,8 @@ class ClickAnalysis extends AnalysisAbstract {
         $ip = $clickParams['request']->server->get('REMOTE_ADDR');
         $userAgent = $clickParams['request']->server->get('HTTP_USER_AGENT');
         
+
+        
         if(!$redirectionEntityInfo['redirection']){
             return false;
         }else{
@@ -33,6 +40,7 @@ class ClickAnalysis extends AnalysisAbstract {
                 'ip' => $ip,
                 'userAgent' => $userAgent,
                 'redirectionUrl' => $redirectionEntityInfo['redirectionUrl'],//Only for redirect not to save.
+                'status' => Click::STATUS_OK,
             );
             
             return self::out($parameters);

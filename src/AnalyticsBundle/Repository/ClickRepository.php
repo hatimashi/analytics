@@ -22,7 +22,7 @@ class ClickRepository extends EntityRepository {
         $click->setReferer($params['referer']);
         $click->setIp($params['ip']);
         $click->setUserAgent($params['userAgent']);
-
+        $click->setStatus($params['status']);
         return $click;
     }
 
