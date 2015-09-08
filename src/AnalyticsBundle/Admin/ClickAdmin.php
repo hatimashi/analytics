@@ -37,15 +37,17 @@ class ClickAdmin extends Admin {
 
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper) {
-        $listMapper
-                ->addIdentifier('id')
-                ->add('redirection_id', null, array('label' => 'redirection_id'))
-                ->add('user_session', null, array('label' => 'user_session'))
-                ->add('referer', null, array('label' => 'referer'))
-                ->add('ip', null, array('label' => 'ip'))
-                ->add('user_agent', null, array('label' => 'user_agenet'))
-                ->add('created', null, array('label' => 'created'))
-        ;
+        if ($this->isGranted('LIST')) {
+            $listMapper
+                    ->addIdentifier('id')
+                    ->add('redirection_id', null, array('label' => 'redirection_id'))
+                    ->add('user_session', null, array('label' => 'user_session'))
+                    ->add('referer', null, array('label' => 'referer'))
+                    ->add('ip', null, array('label' => 'ip'))
+                    ->add('user_agent', null, array('label' => 'user_agenet'))
+                    ->add('created', null, array('label' => 'created'))
+            ;
+        }
     }
 
 }

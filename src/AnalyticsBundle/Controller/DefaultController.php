@@ -13,6 +13,7 @@ use UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
 use AnalyticsBundle\Entity\Click;
+use AnalyticsBundle\Entity\CronTask;
 
 class DefaultController extends Controller {
 
@@ -67,22 +68,20 @@ class DefaultController extends Controller {
         }
 
         //All Clicks
-        $redis->incr('click:' . $cookie . ':' . $cookieParameters['time'] . ':' . $id . ':' . $params['status']);
+        $redis->incr('click:' . $cookie . ':' . time() . ':' . $id . ':' . $params['status']);
 
-        $clicksArray = $redis->keys('*');
-        foreach ($clicksArray as $key) {
-            $clickCount[] = array(
-            'key' => $key,
-            'value' => $redis->get($key),
-                );
-        }
-        foreach($clickCount as $click){
-            echo $click;
-        }
-        die;
+//        $clicksArray = $redis->keys('*');
+//        foreach ($clicksArray as $key) {
+//            $clickCount[] = array(
+//            'key' => $key,
+//            'value' => $redis->get($key),
+//                );
+//        }
 
         //Create & Save in Database
+        if($params !== FALSE){
         $createdRepository = $this->get('click')->create($params);
+        }
         if ($this->get('click')->save($createdRepository)) {
             $response = $this->redirect($this->generateUrl('analytics_default_redirect', array('url' => $params['redirectionUrl'])));
 //            $response->headers->setCookie($myCookie);
@@ -127,6 +126,7 @@ class DefaultController extends Controller {
             $userId = $this->getUser();
 
             $originUrl = $form["origin_url"]->getData();
+            $redirectUrl = $form["redirect_url"]->getData();
 
             //Factory
             $date = microtime();
@@ -137,7 +137,8 @@ class DefaultController extends Controller {
                 $params = array(
                     'userId' => $userId,
                     'originUrl' => $originUrl,
-                    'generatedUrl' => $generatedUrl
+                    'generatedUrl' => $generatedUrl,
+                    'redirectUrl' => $redirectUrl,
                 );
                 //Create & Save
                 $create = $this->get('generate')->create($params);
@@ -161,16 +162,36 @@ class DefaultController extends Controller {
      */
     public function testAction(Request $request) {
 
-//        $redis = new Redis();
-        $redis = $this->container->get('snc_redis.default');
-        $redis->set(1, 'jedynka');
-        $redisRow = $redis->get(1);
+        $command = $this->container->get('analytics.command.test');
+        $keys = $command->load();
+        
+        var_dump($keys);die;
+//        $entity = new CronTask();
+//
+//        $entity
+//            ->setName('Example asset symlinking task')
+//            ->setInterval(3600) // Run once every hour
+//            ->setCommands(array(
+//                'php -f /var/www/analytics/src/AnalyticsBundle/Command/LoadCronTaskData.php'
+//            ));
+//
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($entity);
+//        $em->flush();
 
-        return array(
-            'string1' => $string1,
-            'string2' => $string2,
-            'redisRow' => $redisRow
-        );
+//        return new Response($command);
+    }
+    
+    /**
+     * @Route("/statistic", name="statistic")
+     * @Security("has_role('ROLE_USER')")
+     * @Template()
+     */
+    public function statisticAction(Request $request) {
+
+        $response = array();
+        
+        return $response;
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace AnalyticsBundle\Repository\Service;
 
-class RedirectionService {
+class RedirectionStatisticService {
 
     protected $repository;
 
@@ -20,8 +20,9 @@ class RedirectionService {
         return $this->repository->save($redirection);
     }
     
-    public function findRedirection($entityName, $redirectionId) {
-        return $this->repository->findRedirection($entityName, $redirectionId);
+    public function update($entity, $redirection) {
+    
+        return $this->repository->update($entity, $redirection);
     }
     
     public function findEntity($entityName, $searchByField) {

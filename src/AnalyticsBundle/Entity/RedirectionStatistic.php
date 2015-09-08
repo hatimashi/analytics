@@ -3,14 +3,16 @@
 namespace AnalyticsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * RedirectStatistic
+ * Redirection Statistic
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AnalyticsBundle\Repository\RedirectionStatisticRepository")
  */
-class RedirectStatistic
+class RedirectionStatistic
 {
     /**
      * @var integer
@@ -43,6 +45,13 @@ class RedirectStatistic
      */
     private $date;
 
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
 
     /**
      * Get id
@@ -59,7 +68,7 @@ class RedirectStatistic
      *
      * @param integer $redirectUrlId
      *
-     * @return RedirectStatistic
+     * @return RedirectionStatistic
      */
     public function setRedirectUrlId($redirectUrlId)
     {
@@ -83,7 +92,7 @@ class RedirectStatistic
      *
      * @param integer $clickCount
      *
-     * @return RedirectStatistic
+     * @return RedirectionStatistic
      */
     public function setClickCount($clickCount)
     {
@@ -107,7 +116,7 @@ class RedirectStatistic
      *
      * @param \DateTime $date
      *
-     * @return RedirectStatistic
+     * @return RedirectionStatistic
      */
     public function setDate($date)
     {
@@ -125,5 +134,28 @@ class RedirectStatistic
     {
         return $this->date;
     }
-}
 
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return RedirectionStatistic
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+}

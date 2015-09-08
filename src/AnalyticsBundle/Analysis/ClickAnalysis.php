@@ -22,7 +22,7 @@ class ClickAnalysis extends AnalysisAbstract {
     
     public function analysis($clickParams) {
         
-        $referer = $clickParams['request']->server->get('HTTP_REFERER');
+        $referer = $clickParams['request']->server->get('HTTP_REFERER') ? $clickParams['request']->server->get('HTTP_REFERER') : 'SELF';
         $redirectionEntityInfo = $this->repository->get('generate')->findRedirection('AnalyticsBundle:Redirection', $referer);
         
         $ip = $clickParams['request']->server->get('REMOTE_ADDR');

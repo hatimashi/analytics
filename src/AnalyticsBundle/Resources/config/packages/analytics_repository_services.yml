@@ -20,3 +20,15 @@ services:
         class: 'AnalyticsBundle\Repository\Service\ClickService'
         arguments:    [@doctrine_repository.click]
         lazy: true  
+
+    doctrine_repository.redirection_statistic:
+        class: Doctrine\Common\Persistence\ObjectRepository
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments:
+            - AnalyticsBundle:RedirectionStatistic
+            
+    redirection_statistic:
+        class: 'AnalyticsBundle\Repository\Service\RedirectionStatisticService'
+        arguments:    [@doctrine_repository.redirection_statistic]
+        lazy: true 

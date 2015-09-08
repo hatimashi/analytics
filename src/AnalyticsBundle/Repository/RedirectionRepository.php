@@ -20,11 +20,8 @@ class RedirectionRepository extends EntityRepository
         $redirection->setUserId($params['userId']);
         $redirection->setOriginUrl($params['originUrl']);
         $redirection->setGeneratedUrl($params['generatedUrl']);
+        $redirection->setRedirectUrl($params['redirectUrl']);
 
         return $redirection;
-    }
-    
-    public function findEntity($entityName, $entityId) {
-//        return $this->repository->findEntity($entityName, $entityId);
     }
 }

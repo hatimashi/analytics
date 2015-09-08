@@ -12,3 +12,7 @@ services:
     analytics.click_analysis:
         class: AnalyticsBundle\Analysis\ClickAnalysis
         arguments: [@service_container]
+        
+    analytics.command.test:
+        class: AnalyticsBundle\Command\LoadCronTaskData
+        arguments: [@service_container]

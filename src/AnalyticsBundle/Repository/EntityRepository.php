@@ -21,16 +21,25 @@ class EntityRepository extends BaseRepository {
         return $entity;
     }
 
+    public function findEntity($entityName, $searchByField){
+        $entity = $this->getEntityManager()->getRepository($entityName)->findOneBy($searchByField);
+ 
+        return $entity;
+    }
+    
     public function findRedirection($entityName, $redirectionOriginUrl) {
         $entity = $this->getEntityManager()->getRepository($entityName)->findOneBy(array('origin_url' => $redirectionOriginUrl));
 
-        $options = $entity->getOptions();
+        if($entity){
+        $options = $entity->getOptions()? $entity->getOptions(): FALSE ;
         
         $response = ($options == Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN) ? array(
             'redirection' => $entity,
             'redirectionUrl' => $entity->getRedirectUrl(),
-            ) : FALSE;
-        
+            ) : $response = FALSE;
+        }else {
+            $response = FALSE;
+        }
 //        if ( Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN == 2) {
 //            if (!$entity) {
 //                $response = FALSE;

@@ -53,7 +53,7 @@ class Redirection {
     
     /**
      * 
-     * @ORM\OneToMany(targetEntity="RedirectStatistic", mappedBy="redirect_url_id")
+     * @ORM\OneToMany(targetEntity="RedirectionStatistic", mappedBy="redirect_url_id")
      */
     protected $redirect_url_id;
     
@@ -119,6 +119,11 @@ class Redirection {
         $this->status = self::STATUS_ACTIVE;
     }
 
+    public function __toString() {
+
+     return $this->origin_url;
+    }
+    
     /**
      * Get id
      *
