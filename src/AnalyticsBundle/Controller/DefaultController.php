@@ -163,9 +163,9 @@ class DefaultController extends Controller {
     public function testAction(Request $request) {
 
         $command = $this->container->get('analytics.command.test');
-        $keys = $command->load();
+//        $keys = $command->load();
         
-        var_dump($keys);die;
+        var_dump($command);die;
 //        $entity = new CronTask();
 //
 //        $entity

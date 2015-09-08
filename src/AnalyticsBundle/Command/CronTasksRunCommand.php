@@ -8,23 +8,26 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\StringInput;
 use AnalyticsBundle\Entity\CronTask;
 
-class CronTasksRunCommand extends ContainerAwareCommand
-{
-    private $output;
+class CronTasksRunCommand extends ContainerAwareCommand {
 
-    protected function configure()
-    {
+    private $output;
+    protected $container;
+
+    protected function configure() {
         $this
-            ->setName('crontasks:run')
-            ->setDescription('Runs Cron Tasks if needed')
+                ->setName('crontasks:run')
+                ->setDescription('Runs Cron Tasks if needed')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
+    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) {
+        $this->container = $container;
+    }
 
-        
-        
+    protected function execute(InputInterface $input, OutputInterface $output) {
+
+
+
         $output->writeln('<comment>Running Cron Tasks...</comment>');
 
         $this->output = $output;
@@ -48,28 +51,28 @@ class CronTasksRunCommand extends ContainerAwareCommand
 
 //            $output->writeln('<comment>If next run is >=1... Run=' . $run . '</comment>');
 //            if ($run) {
-                $output->writeln('<comment>First if statament...</comment>');
-                $output->writeln(sprintf('Running Cron Task <info>%s</info>', $crontask->getName()));
+            $output->writeln('<comment>First if statament...</comment>');
+            $output->writeln(sprintf('Running Cron Task <info>%s</info>', $crontask->getName()));
 
-                // Set $lastrun for this crontask
-                $crontask->setLastRun(new \DateTime());
+            // Set $lastrun for this crontask
+            $crontask->setLastRun(new \DateTime());
 
-                try {
-                    $commands = $crontask->getCommands();
-                    foreach ($commands as $command) {
-                        $output->writeln(sprintf('Executing command <comment>%s</comment>...', $command));
+            try {
+                $commands = $crontask->getCommands();
+                foreach ($commands as $command) {
+                    $output->writeln(sprintf('Executing command <comment>%s</comment>...', $command));
 
-                        // Run the command
-                        $this->runCommand($command);
-                    }
-
-                    $output->writeln('<info>SUCCESS</info>');
-                } catch (\Exception $e) {
-                    $output->writeln('<error>ERROR</error>');
+                    // Run the command
+                    $this->runCommand($command);
                 }
 
-                // Persist crontask
-                $em->persist($crontask);
+                $output->writeln('<info>SUCCESS</info>');
+            } catch (\Exception $e) {
+                $output->writeln('<error>ERROR</error>');
+            }
+
+            // Persist crontask
+            $em->persist($crontask);
 //            } else {
 //                $output->writeln(sprintf('Skipping Cron Task <info>%s</info>', $crontask));
 //            }
@@ -79,12 +82,12 @@ class CronTasksRunCommand extends ContainerAwareCommand
         $em->flush();
 
         $output->writeln('<comment>Done!</comment>');
-   
-        
     }
 
-    private function runCommand($string)
-    {
+    private function runCommand($string) {
+        $this->container->get('analytics.command.test');
+        
+        //Not needed bellow until container starts from database
         // Split namespace and arguments
         $namespace = split(' ', $string)[0];
 
@@ -97,5 +100,5 @@ class CronTasksRunCommand extends ContainerAwareCommand
 
         return $returnCode != 0;
     }
-}
 
+}

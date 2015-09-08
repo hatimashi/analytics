@@ -6,8 +6,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use AnalyticsBundle\Entity\Click;
 use DateTime;
 
-//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 class LoadCronTaskData {
 
     protected $container;
