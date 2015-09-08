@@ -49,10 +49,8 @@ class LoadCronTaskData {
         $keysToDelete = '';
         
         foreach ($this->oldRedisKeys as $key){
-//            $keysToDelete .= $key['key'] . ' ';
             $redis->del($key['key']);
         }
-//        $redis->del($keysToDelete);
     }
 
     public function writeRedis($params) {

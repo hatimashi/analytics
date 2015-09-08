@@ -70,21 +70,12 @@ class DefaultController extends Controller {
         //All Clicks
         $redis->incr('click:' . $cookie . ':' . time() . ':' . $id . ':' . $params['status']);
 
-//        $clicksArray = $redis->keys('*');
-//        foreach ($clicksArray as $key) {
-//            $clickCount[] = array(
-//            'key' => $key,
-//            'value' => $redis->get($key),
-//                );
-//        }
-
         //Create & Save in Database
         if($params !== FALSE){
         $createdRepository = $this->get('click')->create($params);
         }
         if ($this->get('click')->save($createdRepository)) {
             $response = $this->redirect($this->generateUrl('analytics_default_redirect', array('url' => $params['redirectionUrl'])));
-//            $response->headers->setCookie($myCookie);
         } else {
             echo 'We can/\'t redirect You.';
         }
@@ -98,7 +89,6 @@ class DefaultController extends Controller {
     public function redirectAction($url) {
 
         return $this->redirect($url);
-//        return array('url' => $url);
     }
 
     /**
@@ -162,24 +152,6 @@ class DefaultController extends Controller {
      */
     public function testAction(Request $request) {
 
-        $command = $this->container->get('analytics.command.test');
-//        $keys = $command->load();
-        
-        var_dump($command);die;
-//        $entity = new CronTask();
-//
-//        $entity
-//            ->setName('Example asset symlinking task')
-//            ->setInterval(3600) // Run once every hour
-//            ->setCommands(array(
-//                'php -f /var/www/analytics/src/AnalyticsBundle/Command/LoadCronTaskData.php'
-//            ));
-//
-//        $em = $this->getDoctrine()->getManager();
-//        $em->persist($entity);
-//        $em->flush();
-
-//        return new Response($command);
     }
     
     /**

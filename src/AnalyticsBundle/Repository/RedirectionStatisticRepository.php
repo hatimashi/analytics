@@ -26,7 +26,6 @@ class RedirectionStatisticRepository extends EntityRepository {
     
     public function update($entity, $params){
         
-//        $entity->setRedirectUrlId($params['redirectUrlId']);
         $entity->setClickCount($params['clickCount']);
         $entity->setDate($params['date']);
         

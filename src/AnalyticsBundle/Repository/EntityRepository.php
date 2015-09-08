@@ -40,13 +40,6 @@ class EntityRepository extends BaseRepository {
         }else {
             $response = FALSE;
         }
-//        if ( Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN == 2) {
-//            if (!$entity) {
-//                $response = FALSE;
-//            }
-//        } else {
-//            $response = $entity;
-//        }
 
         return $response;
     }
