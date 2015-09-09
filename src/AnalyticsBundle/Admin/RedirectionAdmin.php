@@ -15,7 +15,7 @@ class RedirectionAdmin extends Admin {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                ->add('campaign_id', null, array('label' => 'campaign_id'))
+//                ->add('campaign_id', 'entity', array('class' => 'AnalyticsBundle\Entity\Campaign', 'label' => 'campaign_id'))
                 ->add('user_id', 'entity', array('class' => 'UserBundle\Entity\User', 'label' => 'user_id'))
                 ->add('is_deleted', 'checkbox', array('label' => 'is_deleted'))
                 ->add('status', null, array('label' => 'status'))
@@ -43,7 +43,7 @@ class RedirectionAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('id')
-                ->add('campaign_id')
+                ->add('campaign_id', null, array('label' => 'campaign_id'))
                 ->add('user_id')
                 ->add('is_deleted', null, array('label' => 'is_deleted'))
                 ->add('status', null, array('label' => 'status'))

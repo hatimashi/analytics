@@ -171,6 +171,12 @@ class Redirection {
      */
     public function setGeneratedUrl($generatedUrl)
     {
+        $regex = "/(https?:\/\/).*/";
+        $protocol = "http://";
+        
+        if(preg_match($regex, $generatedUrl) == FALSE){
+            $generatedUrl = substr_replace($generatedUrl, $protocol, 0, 0);
+        }
         $this->generated_url = $generatedUrl;
 
         return $this;

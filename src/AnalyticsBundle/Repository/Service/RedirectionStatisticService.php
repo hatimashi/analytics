@@ -25,8 +25,8 @@ class RedirectionStatisticService {
         return $this->repository->update($entity, $redirection);
     }
     
-    public function findEntity($entityName, $searchByField) {
-        return $this->repository->findEntity($entityName, $searchByField);
+    public function findEntity($entityName, $column) {
+        return $this->repository->findEntity($entityName, $column);
     }
     
 }
