@@ -33,7 +33,7 @@ class DefaultController extends Controller {
      */
     public function incomingAction(Request $request, $id) {
 
-        $response = NULL;
+        $response = new Response();
         $myTime = time() + 60 * 60 * 24 * 30;
         $redis = $this->container->get('snc_redis.default');
         $cookie = ($request->cookies->get('__ran') !== NULL ) ? $request->cookies->get('__ran') : NULL;
@@ -68,7 +68,7 @@ class DefaultController extends Controller {
         }
 
         //All Clicks
-        $redis->incr('click:' . $cookie . ':' . time() . ':' . $id . ':' . $params['status']);
+        $redis->incr('click:' . $cookie->getValue() . ':' . time() . ':' . $id . ':' . $params['status']);
 
         //Create & Save in Database
         if($params !== FALSE){
@@ -97,7 +97,6 @@ class DefaultController extends Controller {
      */
     public function analysisAction($param) {
 
-//        return $this->redirect($this->generateUrl('analytics.analysis'));
     }
 
     /**
@@ -152,6 +151,9 @@ class DefaultController extends Controller {
      */
     public function testAction(Request $request) {
 
+        $response = array();
+        
+        return $response;
     }
     
     /**

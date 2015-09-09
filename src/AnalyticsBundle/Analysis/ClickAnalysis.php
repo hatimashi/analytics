@@ -9,10 +9,10 @@ use AnalyticsBundle\Entity\Click;
 
 class ClickAnalysis extends AnalysisAbstract {
 
-    protected $repository;
+    protected $container;
 
-    public function __construct($repository) {
-        $this->repository = $repository;
+    public function __construct($container) {
+        $this->container = $container;
     }
 
     public function in($clickParams) {
@@ -23,7 +23,7 @@ class ClickAnalysis extends AnalysisAbstract {
     public function analysis($clickParams) {
         
         $referer = $clickParams['request']->server->get('HTTP_REFERER') ? $clickParams['request']->server->get('HTTP_REFERER') : 'SELF';
-        $redirectionEntityInfo = $this->repository->get('generate')->findRedirection('AnalyticsBundle:Redirection', $referer);
+        $redirectionEntityInfo = $this->container->get('generate')->findRedirection('AnalyticsBundle:Redirection', $referer);
         
         $ip = $clickParams['request']->server->get('REMOTE_ADDR');
         $userAgent = $clickParams['request']->server->get('HTTP_USER_AGENT');
