@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Redirection
  *
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="redirection")
  * @ORM\Entity(repositoryClass="AnalyticsBundle\Repository\RedirectionRepository")
  * 
@@ -32,7 +33,7 @@ class Redirection {
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Campaign", inversedBy="redirection_id")
+     * @ORM\ManyToOne(targetEntity="Campaign", inversedBy="redirection_id", cascade={"persist"})
      * @ORM\JoinColumn(name="campaign_id", referencedColumnName="id")
      */
     private $campaign_id;
@@ -40,7 +41,7 @@ class Redirection {
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="redirection_id")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="redirection_id", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user_id;
@@ -166,6 +167,7 @@ class Redirection {
     /**
      * Set generated_url
      *
+     * @-ORM\postPersist
      * @param string $generatedUrl
      * @return Redirection
      */
@@ -173,10 +175,16 @@ class Redirection {
     {
         $regex = "/(https?:\/\/).*/";
         $protocol = "http://";
+////        $service = \Symfony\Component\EventDispatcher\Tests\Service::('analytics.generate.factory')->factory();
+//        $date = microtime();
+//        
+//        $originUrl = $this->getOriginUrl();
+//        $generatedUrl = $service->makeGeneratedUrl($originUrl, $date);
         
-        if(preg_match($regex, $generatedUrl) == FALSE){
-            $generatedUrl = substr_replace($generatedUrl, $protocol, 0, 0);
-        }
+//        if(preg_match($regex, $generatedUrl) == FALSE){
+//            $generatedUrl = substr_replace($generatedUrl, $protocol, 0, 0);
+//        }
+        
         $this->generated_url = $generatedUrl;
 
         return $this;

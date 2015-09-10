@@ -16,3 +16,9 @@ services:
     analytics.command.test:
         class: AnalyticsBundle\Command\LoadCronTaskData
         arguments: [@service_container]
+        
+    doctrine.listener.pre_persist_redirection_generate:
+        class: AnalyticsBundle\EventListener\RedirectionGenerateListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }

@@ -17,12 +17,13 @@ class RedirectionAdmin extends Admin {
         $formMapper
 //                ->add('campaign_id', 'entity', array('class' => 'AnalyticsBundle\Entity\Campaign', 'label' => 'campaign_id'))
                 ->add('user_id', 'entity', array('class' => 'UserBundle\Entity\User', 'label' => 'user_id'))
-                ->add('is_deleted', 'checkbox', array('label' => 'is_deleted'))
+//                ->add('is_deleted', 'checkbox', array('label' => 'is_deleted'))
                 ->add('status', null, array('label' => 'status'))
                 ->add('origin_url', null, array('label' => 'origin_url'))
-                ->add('generated_url', null, array('label' => 'generated_url'))
+                ->add('redirect_url', null, array('label' => 'redirect_url'))
+//                ->add('generated_url', null, array('label' => 'generated_url'))
                 ->add('options', null, array('label' => 'options'))
-                ->add('created', 'datetime', array('label' => 'created'))
+//                ->add('created', 'datetime', array('label' => 'created'))
 
         ;
     }

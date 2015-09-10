@@ -71,8 +71,8 @@ class DefaultController extends Controller {
         $redis->incr('click:' . $cookie->getValue() . ':' . time() . ':' . $id . ':' . $params['status']);
 
         //Create & Save in Database
-        if($params !== FALSE){
-        $createdRepository = $this->get('click')->create($params);
+        if ($params !== FALSE) {
+            $createdRepository = $this->get('click')->create($params);
         }
         if ($this->get('click')->save($createdRepository)) {
             $response = $this->redirect($this->generateUrl('analytics_default_redirect', array('url' => $params['redirectionUrl'])));
@@ -96,7 +96,7 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function analysisAction($param) {
-
+        
     }
 
     /**
@@ -106,6 +106,10 @@ class DefaultController extends Controller {
      */
     public function generateAction(Request $request) {
 
+        /* 
+         * Only used for simple/fast link generation.
+         * All staf is dummy made in Sonata dashboard.
+         */
         $param = null;
         $form = $this->createForm('generate', $param);
         $form->handleRequest($request);
@@ -152,10 +156,10 @@ class DefaultController extends Controller {
     public function testAction(Request $request) {
 
         $response = array();
-        
+
         return $response;
     }
-    
+
     /**
      * @Route("/statistic", name="statistic")
      * @Security("has_role('ROLE_USER')")
@@ -164,7 +168,7 @@ class DefaultController extends Controller {
     public function statisticAction(Request $request) {
 
         $response = array();
-        
+
         return $response;
     }
 

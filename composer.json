@@ -33,7 +33,8 @@
         "gedmo/doctrine-extensions":    "dev-master",
         "snc/redis-bundle": "^1.1",
         "leaseweb/memcache-bundle": "*",
-        "predis/predis": "^1.0"
+        "predis/predis": "^1.0",
+        "symfony/event-dispatcher": "^2.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -26,14 +26,14 @@ class Campaign {
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="campaign_id")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="campaign_id", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user_id;
     
     /**
      * 
-     * @ORM\OneToMany(targetEntity="Redirection", mappedBy="campaign_id")
+     * @ORM\OneToMany(targetEntity="Redirection", mappedBy="campaign_id", cascade={"persist"})
      */
     protected $redirection_id;
     
