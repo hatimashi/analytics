@@ -21,8 +21,14 @@ parameters:
     #System
     system_url: analytics.pl.local/incoming
 
+    #Test
+    test_origin_url: http://onet.pl
+
     #Memcache
     memcache_dsn:  localhost
     memcache_port:  11211
     memcache_host:  localhost
     memcache_tcp_port:  11211
+
+    #Translation
+    locale: pl

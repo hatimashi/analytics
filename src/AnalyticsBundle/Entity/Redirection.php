@@ -54,7 +54,7 @@ class Redirection {
     
     /**
      * 
-     * @ORM\OneToMany(targetEntity="RedirectionStatistic", mappedBy="redirect_url_id")
+     * @ORM\OneToOne(targetEntity="RedirectionStatistic", mappedBy="redirect_url_id")
      */
     protected $redirect_url_id;
     
@@ -135,6 +135,16 @@ class Redirection {
         return $this->id;
     }
 
+        /**
+     * Get origin_url
+     *
+     * @return string 
+     */
+    public function getOriginUrl()
+    {
+        return $this->origin_url;
+    }
+    
     /**
      * Set origin_url
      *
@@ -152,16 +162,6 @@ class Redirection {
         $this->origin_url = $originUrl;
 
         return $this;
-    }
-
-    /**
-     * Get origin_url
-     *
-     * @return string 
-     */
-    public function getOriginUrl()
-    {
-        return $this->origin_url;
     }
 
     /**
@@ -393,5 +393,39 @@ class Redirection {
     public function getRedirectUrl()
     {
         return $this->redirect_url;
+    }
+
+    /**
+     * Add redirectUrlId
+     *
+     * @param \AnalyticsBundle\Entity\RedirectionStatistic $redirectUrlId
+     *
+     * @return Redirection
+     */
+    public function addRedirectUrlId(\AnalyticsBundle\Entity\RedirectionStatistic $redirectUrlId)
+    {
+        $this->redirect_url_id[] = $redirectUrlId;
+
+        return $this;
+    }
+
+    /**
+     * Remove redirectUrlId
+     *
+     * @param \AnalyticsBundle\Entity\RedirectionStatistic $redirectUrlId
+     */
+    public function removeRedirectUrlId(\AnalyticsBundle\Entity\RedirectionStatistic $redirectUrlId)
+    {
+        $this->redirect_url_id->removeElement($redirectUrlId);
+    }
+
+    /**
+     * Get redirectUrlId
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRedirectUrlId()
+    {
+        return $this->redirect_url_id;
     }
 }

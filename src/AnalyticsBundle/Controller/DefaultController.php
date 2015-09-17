@@ -100,7 +100,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/generate")
+     * @Route("/{_locale}/generate")
      * @Template()
      * @Security("has_role('ROLE_USER')")
      */
@@ -143,7 +143,7 @@ class DefaultController extends Controller {
             }
         } else {
 
-            $response = array('form' => $form->createView(), 'info' => 'Fill to generate proper redirection URL');
+            $response = array('form' => $form->createView(), 'info' => $this->get('translator')->trans('Fill to generate proper redirection URL'));
         }
 
         return $response;

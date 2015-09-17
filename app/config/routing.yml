@@ -5,6 +5,8 @@ user:
 app:
     resource: "@AnalyticsBundle/Controller/"
     type:     annotation
+    requirements:
+        _locale: "%app.locales%"
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

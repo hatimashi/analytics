@@ -26,7 +26,7 @@ class RedirectionStatistic
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Redirection", inversedBy="redirect_url_id")
+     * @ORM\OneToOne(targetEntity="Redirection", inversedBy="redirect_url_id")
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $redirect_url_id;
@@ -36,7 +36,7 @@ class RedirectionStatistic
      *
      * @ORM\Column(name="click_count", type="integer")
      */
-    private $clickCount;
+    private $click_count;
 
     /**
      * @var \DateTime
@@ -88,27 +88,27 @@ class RedirectionStatistic
     }
 
     /**
-     * Set clickCount
+     * Set click_count
      *
-     * @param integer $clickCount
+     * @param integer $click_count
      *
      * @return RedirectionStatistic
      */
-    public function setClickCount($clickCount)
+    public function setClickCount($click_count)
     {
-        $this->clickCount = $clickCount;
+        $this->click_count = $click_count;
 
         return $this;
     }
 
     /**
-     * Get clickCount
+     * Get click_count
      *
      * @return integer
      */
     public function getClickCount()
     {
-        return $this->clickCount;
+        return $this->click_count;
     }
 
     /**
@@ -157,5 +157,10 @@ class RedirectionStatistic
     public function getCreated()
     {
         return $this->created;
+    }
+    
+    public function __toString() {
+
+     return (string)$this->click_count;
     }
 }

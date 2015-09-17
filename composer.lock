@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb6d814f0a9866fa47d75ccf264dcd7b",
+    "hash": "0738c4548435dc7c18045d796db314d6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1061,12 +1061,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "6b7bb04c6d507bb5356bf70b2d1bc30ce64ffc60"
+                "reference": "757fc8f1b1362970328568114e8fca35cdbe1df2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/6b7bb04c6d507bb5356bf70b2d1bc30ce64ffc60",
-                "reference": "6b7bb04c6d507bb5356bf70b2d1bc30ce64ffc60",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/757fc8f1b1362970328568114e8fca35cdbe1df2",
+                "reference": "757fc8f1b1362970328568114e8fca35cdbe1df2",
                 "shasum": ""
             },
             "require": {
@@ -1120,7 +1120,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-09-07 08:53:52"
+            "time": "2015-09-14 10:50:16"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -2880,16 +2880,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "2.3.5",
+            "version": "2.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "8ce1a1b605e6b897e5403aa2003d40a05eca2f69"
+                "reference": "1dfcfcf8650e8d8c4a4400b9525b2097110f1f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/8ce1a1b605e6b897e5403aa2003d40a05eca2f69",
-                "reference": "8ce1a1b605e6b897e5403aa2003d40a05eca2f69",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1dfcfcf8650e8d8c4a4400b9525b2097110f1f11",
+                "reference": "1dfcfcf8650e8d8c4a4400b9525b2097110f1f11",
                 "shasum": ""
             },
             "require": {
@@ -2961,7 +2961,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-08-26 08:07:15"
+            "time": "2015-09-10 19:16:15"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -3289,6 +3289,66 @@
                 "xls"
             ],
             "time": "2015-06-29 18:36:46"
+        },
+        {
+            "name": "sonata-project/translation-bundle",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/SonataTranslationBundle.git",
+                "reference": "9e51b13d4751172e8e5638df97e3884b72020419"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/SonataTranslationBundle/zipball/9e51b13d4751172e8e5638df97e3884b72020419",
+                "reference": "9e51b13d4751172e8e5638df97e3884b72020419",
+                "shasum": ""
+            },
+            "require": {
+                "sonata-project/core-bundle": "~2.2",
+                "symfony/symfony": "~2.2"
+            },
+            "require-dev": {
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "suggest": {
+                "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
+                "sonata-project/doctrine-phpcr-admin-bundle": "1.*",
+                "stof/doctrine-extensions-bundle": "1.1.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\TranslationBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Bastien",
+                    "email": "nbastien.pro@gmail.com",
+                    "homepage": "https://github.com/nicolas-bastien"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataTranslationBundle/contributors"
+                }
+            ],
+            "description": "SonataTranslationBundle",
+            "homepage": "http://sonata-project.org/bundles/translation",
+            "keywords": [
+                "i18n",
+                "translation"
+            ],
+            "time": "2015-03-17 12:13:01"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3705,16 +3765,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.21.2",
+            "version": "v1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3"
+                "reference": "204a6c94907c2c2225322c267e09adbb2b1c04fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/204a6c94907c2c2225322c267e09adbb2b1c04fd",
+                "reference": "204a6c94907c2c2225322c267e09adbb2b1c04fd",
                 "shasum": ""
             },
             "require": {
@@ -3727,7 +3787,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.21-dev"
+                    "dev-master": "1.22-dev"
                 }
             },
             "autoload": {
@@ -3762,7 +3822,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-09 05:28:51"
+            "time": "2015-09-13 17:12:38"
         },
         {
             "name": "zendframework/zend-cache",
@@ -4493,16 +4553,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2d7c03c0e4e080901b8f33b2897b0577be18a13c"
+                "reference": "ef1ca6835468857944d5c3b48fa503d5554cff2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2d7c03c0e4e080901b8f33b2897b0577be18a13c",
-                "reference": "2d7c03c0e4e080901b8f33b2897b0577be18a13c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ef1ca6835468857944d5c3b48fa503d5554cff2f",
+                "reference": "ef1ca6835468857944d5c3b48fa503d5554cff2f",
                 "shasum": ""
             },
             "require": {
@@ -4551,7 +4611,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-04 03:42:39"
+            "time": "2015-09-14 06:51:16"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4684,16 +4744,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.6",
+            "version": "1.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b"
+                "reference": "6f1447a60f068c89d345ceee32025a51dd630f1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
-                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/6f1447a60f068c89d345ceee32025a51dd630f1c",
+                "reference": "6f1447a60f068c89d345ceee32025a51dd630f1c",
                 "shasum": ""
             },
             "require": {
@@ -4729,7 +4789,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-08-16 08:51:00"
+            "time": "2015-09-14 18:56:12"
         },
         {
             "name": "phpunit/phpunit",

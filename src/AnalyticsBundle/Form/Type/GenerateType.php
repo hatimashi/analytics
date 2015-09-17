@@ -4,7 +4,7 @@ namespace AnalyticsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use AnalyticsBundle\Entity\Redirection;
 
 class GenerateType extends AbstractType {
@@ -23,25 +23,27 @@ class GenerateType extends AbstractType {
                 ->add('redirect_url', null, array(
                     'attr' => array(
                         'placeholder' => 'Redirect to URL',
-                    )
+                    ),
+                    'label' => 'redirect_url'
                 ))
                 ->add('options', 'choice', array(
                     'choices' => array(
-                        Redirection::OPTIONS_NOT_ALLOWED_FROM_DIFFERENT_DOMAIN => 'Wymagaj Redirect z określonej domeny',
-                        Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN => 'Redirect z dowolnej domeny',
+                        Redirection::OPTIONS_NOT_ALLOWED_FROM_DIFFERENT_DOMAIN => 'Restricted redirection',
+                        Redirection::OPTIONS_ALLOWED_FROM_DIFFERENT_DOMAIN => 'Not Restricted redirection',
                     ),
+                    'label' => 'options',
                     'placeholder' => 'Options',
                 ))
                 ->add('save', 'submit', array('label' => 'generate'))
         ;
     }
 
-//    /**
-//     * @param OptionsResolverInterface $resolver
-//     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AnalyticsBundle\Entity\Redirection'
+            'data_class' => 'AnalyticsBundle\Entity\Redirection',
         ));
     }
 

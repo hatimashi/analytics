@@ -21,9 +21,10 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Sonata\TranslationBundle\SonataTranslationBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new Lsw\MemcacheBundle\LswMemcacheBundle(),
         );

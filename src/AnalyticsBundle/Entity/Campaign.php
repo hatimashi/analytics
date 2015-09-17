@@ -30,13 +30,13 @@ class Campaign {
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user_id;
-    
+
     /**
      * 
      * @ORM\OneToMany(targetEntity="Redirection", mappedBy="campaign_id", cascade={"persist"})
      */
     protected $redirection_id;
-    
+
     /**
      * @var string
      *
@@ -59,13 +59,17 @@ class Campaign {
         $this->redirection_id = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString() {
+
+        return $this->name;
+    }
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -75,8 +79,7 @@ class Campaign {
      * @param string $name
      * @return Campaign
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -87,8 +90,7 @@ class Campaign {
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -110,8 +112,7 @@ class Campaign {
      *
      * @return \DateTime 
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
     }
 
@@ -121,8 +122,7 @@ class Campaign {
      * @param \UserBundle\Entity\User $userId
      * @return Campaign
      */
-    public function setUserId(\UserBundle\Entity\User $userId = null)
-    {
+    public function setUserId(\UserBundle\Entity\User $userId = null) {
         $this->user_id = $userId;
 
         return $this;
@@ -133,8 +133,7 @@ class Campaign {
      *
      * @return \UserBundle\Entity\User 
      */
-    public function getUserId()
-    {
+    public function getUserId() {
         return $this->user_id;
     }
 
@@ -144,8 +143,7 @@ class Campaign {
      * @param \AnalyticsBundle\Entity\Redirection $redirectionId
      * @return Campaign
      */
-    public function addRedirectionId(\AnalyticsBundle\Entity\Redirection $redirectionId)
-    {
+    public function addRedirectionId(\AnalyticsBundle\Entity\Redirection $redirectionId) {
         $this->redirection_id[] = $redirectionId;
 
         return $this;
@@ -156,8 +154,7 @@ class Campaign {
      *
      * @param \AnalyticsBundle\Entity\Redirection $redirectionId
      */
-    public function removeRedirectionId(\AnalyticsBundle\Entity\Redirection $redirectionId)
-    {
+    public function removeRedirectionId(\AnalyticsBundle\Entity\Redirection $redirectionId) {
         $this->redirection_id->removeElement($redirectionId);
     }
 
@@ -166,8 +163,8 @@ class Campaign {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRedirectionId()
-    {
+    public function getRedirectionId() {
         return $this->redirection_id;
     }
+
 }

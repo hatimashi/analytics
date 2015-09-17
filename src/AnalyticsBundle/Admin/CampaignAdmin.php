@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class CampaignAdmin extends Admin {
 
@@ -20,26 +21,30 @@ class CampaignAdmin extends Admin {
                 ->end()
                 ->with('Redirection')
                 ->add('redirection_id', 'sonata_type_collection', array(
+                    'by_reference' => true,
                     'label' => 'redirection_id',
                     'type_options' => array(
                         // Prevents the "Delete" option from being displayed
-                        'delete' => false,
-                        'delete_options' => array(
-                            // You may otherwise choose to put the field but hide it
-                            'type' => 'hidden',
-                            // In that case, you need to fill in the options as well
-                            'type_options' => array(
-                                'mapped' => false,
-                                'required' => false,
-                            )
-                        )
-                    )), array(
+                        'delete' => true,
+//                        'delete_options' => array(
+//                            // You may otherwise choose to put the field but hide it
+//                            'type' => 'delete',
+//                            // In that case, you need to fill in the options as well
+//                            'type_options' => array(
+//                                'mapped' => false,
+//                                'required' => false,
+//                            )
+//                        )
+                    )
+                    ), array(
                     'edit' => 'inline',
                     'inline' => 'table',
-                    'sortable' => 'position'))
+                    'sortable' => 'position',
+                    'allow_delete' => true,
+                        'btn_delete' => true))
                 ->end()
                 ->with('Click')
-//                    ->add('click', 'sonata_type_admin', array())
+//                    ->add('click', 'entity', array('class' => 'AnalyticsBundle\Entity\Click'))
                 ->end()
         ;
     }
@@ -62,6 +67,13 @@ class CampaignAdmin extends Admin {
                 ->add('user_id')
                 ->add('created')
         ;
+    }
+    
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('redirection_id')
+        ;    
     }
 
 }

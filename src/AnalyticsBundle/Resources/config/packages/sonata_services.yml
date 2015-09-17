@@ -37,3 +37,14 @@ services:
             - ~
         calls:
             - [ setLabelTranslatorStrategy, ["@sonata.admin.label.strategy.underscore"]]
+            
+    sonata.admin.redirection_statistic_click:
+        class: AnalyticsBundle\Admin\RedirectionStatisticAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "RedirectionStatistic" }
+        arguments:
+            - ~
+            - AnalyticsBundle\Entity\RedirectionStatistic
+            - ~
+        calls:
+            - [ setLabelTranslatorStrategy, ["@sonata.admin.label.strategy.underscore"]]

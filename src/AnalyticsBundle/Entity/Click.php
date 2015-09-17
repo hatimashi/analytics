@@ -247,4 +247,9 @@ class Click
     {
         return $this->status;
     }
+    
+    public function __toString() {
+
+     return $this->user_session;
+    }
 }
