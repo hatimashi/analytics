@@ -32,3 +32,6 @@ parameters:
 
     #Translation
     locale: pl
+
+    #Assets
+    assets_prefix: 'analytics'

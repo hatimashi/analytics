@@ -4,9 +4,15 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            {% stylesheets 
+                    "bundles/analytics/css/login_form.css" 
+            filter='yui_css' %}
+                <link rel="stylesheet" href="{{ assets_prefix ~ asset_url }}" />
+            {% endstylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
     </head>
     <body>
         {% block body %}
