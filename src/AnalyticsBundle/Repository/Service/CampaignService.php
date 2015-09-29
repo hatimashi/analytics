@@ -23,5 +23,9 @@ class CampaignService {
     public function findEntity($entityName, $column) {
         return $this->repository->findEntity($entityName, $column);
     }
+    
+    public function findEntityBy($entityName, $fieldsToFiter) {
+        return $this->repository->findEntityBy($entityName, $fieldsToFiter);
+    }
 
 }

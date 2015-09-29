@@ -48,3 +48,9 @@ services:
             - ~
         calls:
             - [ setLabelTranslatorStrategy, ["@sonata.admin.label.strategy.underscore"]]
+            
+    sonata.block.statistic_clicks:
+        class: AnalyticsBundle\Block\StatisticClicksBlockService
+        tags:
+            - { name: sonata.block }
+        arguments: ['sonata.block.statistic_clicks', '@templating']

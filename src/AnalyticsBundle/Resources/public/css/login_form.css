@@ -1,10 +1,10 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 2015-09-18, 09:20:35
-    Author     : lukaszzukowskileadbullet
-*/
+#userforms{
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+    border: 1px solid darkgray;
+    border-radius: 20px;
+    padding: 25px 35px; 
+    background: rgba(30, 144, 255, 0.86);
+}
 

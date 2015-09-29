@@ -25,16 +25,16 @@ class CampaignAdmin extends Admin {
                     'label' => 'redirection_id',
                     'type_options' => array(
                         // Prevents the "Delete" option from being displayed
-                        'delete' => true,
-//                        'delete_options' => array(
+                        'delete' => false,
+                        'delete_options' => array(
 //                            // You may otherwise choose to put the field but hide it
-//                            'type' => 'delete',
+                            'type' => 'hidden',
 //                            // In that case, you need to fill in the options as well
-//                            'type_options' => array(
-//                                'mapped' => false,
-//                                'required' => false,
-//                            )
-//                        )
+                            'type_options' => array(
+                                'mapped' => false,
+                                'required' => false,
+                            )
+                        )
                     )
                     ), array(
                     'edit' => 'inline',

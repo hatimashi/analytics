@@ -27,6 +27,14 @@ class EntityRepository extends BaseRepository {
         return $entity;
     }
     
+    public function findEntityBy($entityName, $fieldsToFiter = array()){
+        $entity = $this->getEntityManager()->getRepository($entityName)->findBy(
+                $fieldsToFiter
+                );
+        
+        return $entity;
+    }
+    
     public function findRedirection($entityName, $redirectionOriginUrl) {
         $entity = $this->getEntityManager()->getRepository($entityName)->findOneBy(array('origin_url' => $redirectionOriginUrl));
 

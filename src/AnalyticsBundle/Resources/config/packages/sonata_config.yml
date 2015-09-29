@@ -1,10 +1,14 @@
 sonata_block:
     default_contexts: [cms]
+#    profiler:
+#        enabled:        %kernel.debug%
+#        template:       SonataBlockBundle:Profiler:block.html.twig
     blocks:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
-
+#        sonata.block.service.rss: ~
+        sonata.block.statistic_clicks:
         
 
 sonata_doctrine_orm_admin:
@@ -55,7 +59,7 @@ sonata_doctrine_orm_admin:
                 url:        SonataAdminBundle:CRUD:show_url.html.twig
 
 sonata_admin:
-    title: "Super Admin"
+    title: "Analytics Admin"
     security:
 #        handler: sonata.admin.security.handler.acl
         # acl security information
@@ -80,19 +84,24 @@ sonata_admin:
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
-                    groups: [campaign, redirection, click]
-#            -
-#                position: right
-#                type: sonata.block.service.generate_link
+                    groups: [campaign]
+            -
+                position: right
+                type: sonata.block.statistic_clicks
+#                settings:
+#                    groups: [statistic_clicks]
         
         
         groups:
             campaign:
                 items:
                     - sonata.admin.campaign
-            redirection:
-                items:
-                    - sonata.admin.redirection
-            click:
-                items:
-                    - sonata.admin.click
+#            statistic_clicks:
+#                items:
+#                    - sonata.block.statistic_clicks
+#            redirection:
+#                items:
+#                    - sonata.admin.redirection
+#            click:
+#                items:
+#                    - sonata.admin.click

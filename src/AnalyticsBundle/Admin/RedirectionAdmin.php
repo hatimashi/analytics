@@ -30,7 +30,7 @@ class RedirectionAdmin extends Admin {
                 ->add('redirect_url_id', 'sonata_type_model_list', array(
                     'label' => 'redirect_url_id',
                     'btn_add'       => false,      //Specify a custom label
-                    'btn_list'      => 'button.list',     //which will be translated
+                    'btn_list'      => false,     //which will be translated
                     'btn_delete'    => false,             //or hide the button.
                     ))
                 ->end()

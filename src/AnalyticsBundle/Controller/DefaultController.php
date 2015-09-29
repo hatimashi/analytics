@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
 use AnalyticsBundle\Entity\Click;
 use AnalyticsBundle\Entity\CronTask;
+use DateTime;
 
 class DefaultController extends Controller {
 
@@ -154,14 +155,28 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function testAction(Request $request) {
+         $command = $this->container->get('analytics.command.test');
+        $keys = $command->load();
+        
+//        var_dump($command);die;
+        $entity = new CronTask();
 
-        $response = array();
+        $entity
+            ->setName('Example asset symlinking task')
+            ->setInterval(3600) // Run once every hour
+            ->setCommands(array(
+                'php -f /var/www/analytics/src/AnalyticsBundle/Command/LoadCronTaskData.php'
+            ));
 
-        return $response;
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entity);
+        $em->flush();
+
+        return new Response($command);
     }
 
     /**
-     * @Route("/statistic", name="statistic")
+     * @Route("/{_locale}/{type}/statistic", name="statistic")
      * @Security("has_role('ROLE_USER')")
      * @Template()
      */

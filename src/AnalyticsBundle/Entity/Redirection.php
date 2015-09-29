@@ -61,14 +61,14 @@ class Redirection {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_deleted", type="boolean", nullable=true, options={"default":"0"})
+     * @ORM\Column(name="is_deleted", type="boolean", nullable=true, options={"default":0})
      */
     private $is_deleted;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer", nullable=true, options={"default":"1"})
+     * @ORM\Column(name="status", type="integer", nullable=false, options={"default":1})
      */
     private $status;
     
@@ -122,7 +122,9 @@ class Redirection {
 
     public function __toString() {
 
-     return $this->origin_url;
+        $response = $this->generated_url;
+        
+     return $response;
     }
     
     /**
@@ -380,6 +382,13 @@ class Redirection {
      */
     public function setRedirectUrl($redirectUrl)
     {
+        $regex = "/(https?:\/\/).*/";
+        $protocol = "http://";
+        
+        if(preg_match($regex, $redirectUrl) == FALSE){
+            $redirectUrl = substr_replace($redirectUrl, $protocol, 0, 0);
+        }
+        
         $this->redirect_url = $redirectUrl;
 
         return $this;
