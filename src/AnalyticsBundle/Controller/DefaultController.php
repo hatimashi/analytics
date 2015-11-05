@@ -38,6 +38,7 @@ class DefaultController extends Controller {
         $myTime = time() + 60 * 60 * 24 * 30;
         $redis = $this->container->get('snc_redis.default');
         $cookie = ($request->cookies->get('__ran') !== NULL ) ? $request->cookies->get('__ran') : NULL;
+        $createdRepository = null;
 
         $clickParams = array(
             'request' => $request,
@@ -62,8 +63,8 @@ class DefaultController extends Controller {
         $params = $this->container->get('analytics.click_analysis')->in($clickParams);
 
         //Memcache
-        if (!$this->get('memcache.default')->replace('click:' . $cookie, 0, 2)) {
-            $this->get('memcache.default')->set('click:' . $cookie, 0, 2);
+        if (!$this->get('memcache.default')->replace('click:' . $cookie, 0, 2, 5)) {
+            $this->get('memcache.default')->set('click:' . $cookie, 0, 2, 5);
         } else {
             $params['status'] = Click::STATUS_FRAUD;
         }
